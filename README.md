@@ -1,4 +1,4 @@
-# ELearning Node and Express
+# Learning Node and Express
  A Project to learn node and express following mindudev bootmcap
 
 ## Available Scripts
