@@ -1,7 +1,10 @@
 //Importing http, two ways
 //import http from 'http';
-const { Console } = require('console');
-const http = require('http');
+
+//We change http for express
+//const http = require('http');
+const express = require('express');
+const app = express();
 
 const friends =  [
     {
@@ -18,17 +21,41 @@ const friends =  [
     }
 ];
 
-//Create Server
-const app = http.createServer((request, response) => {
+//Create Server with http
+//const app = http.createServer((request, response) => {
     //Now we return a json instead of plain text
     //response.writeHead(200, {'Content-Type': 'text/plain'})
-    response.writeHead(200, {'Content-Type': 'application/json'})
+    //response.writeHead(200, {'Content-Type': 'application/json'})
     //We indicate the value returned
-    response.end(JSON.stringify(friends));
+    //response.end(JSON.stringify(friends));
+//});
+
+//Create a server with express
+app.get('/', (request, response) => {
+    response.send('<h1>Hello</h1>');
+});
+
+app.get('/api/friends', (request, response) => {
+    response.json(friends);
+});
+
+app.get('/api/friends/:id', (request, response) => {
+    const id = request.params.id;
+    const friend = friends.find(element => element.id === parseInt(id));
+    if (friend !== undefined) {
+        response.json(friend);
+    } else {
+        response.status(404).end
+        response.send('<h1>You dont\'t have any friends</h1>');
+    }
 });
 
 //Listen
 const PORT = 3001;
-app.listen(PORT);
-console.log(`Server is running on port ${PORT}`);
+// app.listen(PORT);
+// console.log(`Server is running on port ${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+})
+
 
