@@ -20,5 +20,8 @@
   "homepage": "https://github.com/Mia-Salazar/mindudev-bootcamp#readme",
   "devDependencies": {
     "nodemon": "^2.0.9"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
