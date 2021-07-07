@@ -46,7 +46,7 @@ app.get('/api/friends/:id', (request, response) => {
     if (friend !== undefined) {
         response.json(friend);
     } else {
-        response.status(404).end
+        response.status(404).end;
         response.send('<h1>You dont\'t have any friends</h1>');
     }
 });
@@ -65,6 +65,12 @@ app.post('/api/friends', (request, response) => {
     }
     friends = [...friends, newFriend]
     response.json(newFriend)
+});
+   
+app.delete('/api/friends/:id', (request, response) => {
+    const id = request.params.id;
+    friends = friends.filter(friend => friend.id !== parseInt(id));
+    response.status(204).end();
 });
 
 //Listen
