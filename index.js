@@ -5,6 +5,7 @@
 //const http = require('http');
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 const friends =  [
     {
@@ -50,6 +51,22 @@ app.get('/api/friends/:id', (request, response) => {
     }
 });
 
+app.post('/api/friends', (request, response) => {
+    const friend = request.body;
+    const newFriend = {
+        id: friends.length,
+        content: friend.content
+    }
+
+    if(!friend || !friend.content) {
+        response.status(400).json({
+            error: 'No name of friend was send'
+        })
+    }
+    friends = [...friends, newFriend]
+    response.json(newFriend)
+});
+   
 app.delete('/api/friends/:id', (request, response) => {
     const id = request.params.id;
     friends = friends.filter(friend => friend.id !== parseInt(id));
