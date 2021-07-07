@@ -5,6 +5,7 @@
 //const http = require('http');
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 const friends =  [
     {
@@ -48,6 +49,22 @@ app.get('/api/friends/:id', (request, response) => {
         response.status(404).end
         response.send('<h1>You dont\'t have any friends</h1>');
     }
+});
+
+app.post('/api/friends', (request, response) => {
+    const friend = request.body;
+    const newFriend = {
+        id: friends.length,
+        content: friend.content
+    }
+
+    if(!friend || !friend.content) {
+        response.status(400).json({
+            error: 'No name of friend was send'
+        })
+    }
+    friends = [...friends, newFriend]
+    response.json(newFriend)
 });
 
 //Listen
