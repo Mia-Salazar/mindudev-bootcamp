@@ -14,6 +14,8 @@ $ npm install
 
 * [Node](https://nodejs.org/es/) - Nodejs
 * [Express](https://expressjs.com/es/) - Express
+* [Jest](https://jestjs.io/es-ES/) - Testing with Jest
+* [Supertest](https://github.com/visionmedia/supertest) - Testing with Supertest
 * [Mindudev](https://midu.dev/) - Following Mindudev Bootcamp
 
 
