@@ -1,6 +1,6 @@
 const { palindrome } = require('../utils/palindrome');
 
-test('check a quote in reverse', () => {
+test('check a palindrome in reverse', () => {
     const result = palindrome('miasalazar');
     expect(result).toBe('razalasaim');
 })
