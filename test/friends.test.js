@@ -1,29 +1,7 @@
 const supertest = require('supertest');
 const {app, server} = require('../index');
 const api = supertest(app);
-
-const initialFriends =  [
-    {
-        "id": 0,
-        "name": "Commander Sheppard",
-        "quote": "I'm Commander Shepard and this is my favorite store on the Citadel."
-    },
-    {
-        "id": 1,
-        "name": "Kaidan Alenko",
-        "quote": "Big place"
-    },
-    {
-        "id": 2,
-        "name": "Garrus Vakarian",
-        "quote": "I'm In The Middle of Some Calibrations"
-    },
-    {
-        "id": 3,
-        "name": "Tali'Zorah nar Rayya ",
-        "quote": "Young males of all species have strange ideas of what the asari are like"
-    }
-];
+const { initialFriends, getAllfriends } = require('./helpers');
 
 beforeEach(async () => {
     console.log('I go first');
@@ -47,8 +25,7 @@ test.skip('post adds a new friend', async () => {
         .expect(200)
         .expect('Content-Type', /application\/json/)
 
-    const response = await api.get('/api/friends');
-    const names = response.body.map(friend => friend.name);
+    const friendsName = await getAllfriends();
     expect(response.body).toHaveLength(4);
     expect(names).toContain(newFriend.name)
 });
