@@ -51,6 +51,18 @@ app.get('/api/friends/:id', (request, response) => {
     }
 });
 
+//The same but with async await
+app.get('/api/friends/:id', async(request, response) => {
+    const id = request.params.id;
+    const friend = await friends.find(element => element.id === parseInt(id));
+    if (friend !== undefined) {
+        response.json(friend);
+    } else {
+        response.status(404).end;
+        response.send('<h1>You dont\'t have any friends</h1>');
+    }
+});
+
 app.post('/api/friends', (request, response) => {
     const friend = request.body;
     const newFriend = {
